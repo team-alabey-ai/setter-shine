@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase';
-import { MetricsDailyRow } from '@/integrations/supabase/types';
+import { Tables } from '@/integrations/supabase/types';
+
+type MetricsDailyRow = Tables<'metrics_daily'>;
 import { CURRENT_TENANT_ID } from '@/lib/constants';
 import { DailyData } from '@/lib/mockData';
 

@@ -127,10 +127,6 @@ const Index = () => {
           <EmptyState
             title="Failed to load metrics"
             description={error.message}
-            action={{
-              label: "Retry",
-              onClick: () => window.location.reload()
-            }}
           />
         </main>
       </div>
