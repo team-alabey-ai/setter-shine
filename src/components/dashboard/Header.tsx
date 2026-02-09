@@ -1,3 +1,7 @@
+import { useNavigate } from 'react-router-dom';
+import { LogOut } from 'lucide-react';
+import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
 import DateRangePicker from './DateRangePicker';
 import FilterDropdown from './FilterDropdown';
 import { DateRangePreset } from '@/lib/mockData';
@@ -9,6 +13,14 @@ interface HeaderProps {
 }
 
 const Header = ({ dateRange, onDateRangeChange, clientName = '{Client}' }: HeaderProps) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Add your logout logic here (e.g., clear session, tokens)
+    toast.success('Logged out successfully');
+    navigate('/login');
+  };
+
   return (
     <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 py-3 sm:py-4">
@@ -36,6 +48,15 @@ const Header = ({ dateRange, onDateRangeChange, clientName = '{Client}' }: Heade
               options={['All Sources', 'Inbound', 'Outbound']}
               placeholder="All Sources"
             />
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleLogout}
+              className="gap-2"
+            >
+              <LogOut className="h-4 w-4" />
+              <span className="hidden sm:inline">Log out</span>
+            </Button>
           </div>
         </div>
       </div>
