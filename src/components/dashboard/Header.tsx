@@ -21,7 +21,7 @@ const Header = ({ dateRange, onDateRangeChange, clientName = '{Client}' }: Heade
     try {
       await signOut();
       toast.success('Logged out successfully');
-      navigate('/');
+      navigate('/login');
     } catch (error) {
       toast.error('Failed to log out');
     }
