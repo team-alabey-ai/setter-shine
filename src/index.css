@@ -1,0 +1,214 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Hide scrollbar for horizontal scroll containers */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Linden AI - Premium Dark Dashboard Design System */
+
+@layer base {
+  :root {
+    --background: 225 30% 8%;
+    --foreground: 220 20% 92%;
+
+    --card: 225 25% 11%;
+    --card-foreground: 220 20% 92%;
+    --card-hover: 225 25% 13%;
+    --card-border: 225 20% 18%;
+
+    --popover: 225 25% 10%;
+    --popover-foreground: 220 20% 92%;
+
+    --primary: 223 100% 12%;
+    --primary-foreground: 220 20% 95%;
+    --primary-glow: 223 80% 20%;
+
+    --secondary: 225 20% 15%;
+    --secondary-foreground: 220 20% 85%;
+
+    --muted: 225 15% 18%;
+    --muted-foreground: 220 15% 55%;
+
+    --accent: 223 100% 12%;
+    --accent-foreground: 220 20% 95%;
+    --accent-soft: 223 60% 25%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 98%;
+
+    --success: 145 60% 40%;
+    --success-foreground: 145 60% 95%;
+
+    --warning: 38 90% 50%;
+    --warning-foreground: 38 90% 10%;
+
+    --border: 225 20% 18%;
+    --input: 225 20% 15%;
+    --ring: 223 80% 30%;
+
+    --radius: 0.5rem;
+
+    /* Chart colors */
+    --chart-primary: 223 100% 45%;
+    --chart-secondary: 220 60% 60%;
+    --chart-accent: 280 60% 55%;
+    --chart-muted: 220 15% 40%;
+
+    /* Shadows and glows */
+    --shadow-sm: 0 1px 2px 0 hsl(225 30% 5% / 0.5);
+    --shadow-md: 0 4px 6px -1px hsl(225 30% 5% / 0.4), 0 2px 4px -2px hsl(225 30% 5% / 0.3);
+    --shadow-lg: 0 10px 15px -3px hsl(225 30% 5% / 0.4), 0 4px 6px -4px hsl(225 30% 5% / 0.3);
+    --shadow-glow: 0 0 20px hsl(223 100% 12% / 0.3);
+    --shadow-glow-hover: 0 0 30px hsl(223 100% 20% / 0.4);
+
+    --sidebar-background: 225 25% 10%;
+    --sidebar-foreground: 220 20% 85%;
+    --sidebar-primary: 223 100% 12%;
+    --sidebar-primary-foreground: 220 20% 95%;
+    --sidebar-accent: 225 20% 15%;
+    --sidebar-accent-foreground: 220 20% 85%;
+    --sidebar-border: 225 20% 18%;
+    --sidebar-ring: 223 80% 30%;
+  }
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    @apply border-border;
+  }
+
+  html {
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    width: 100%;
+    overflow-x: hidden;
+    min-height: 100dvh;
+  }
+
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
+
+@layer components {
+  .card-premium {
+    @apply bg-card rounded-lg transition-all duration-300;
+    border: 1px solid hsl(var(--card-border));
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-premium:hover {
+    background: hsl(var(--card-hover));
+    border-color: hsl(var(--accent) / 0.3);
+    box-shadow: var(--shadow-glow-hover);
+  }
+
+  .metric-value {
+    @apply text-4xl font-semibold tracking-tight text-foreground;
+  }
+
+  .metric-value-large {
+    @apply text-6xl font-bold tracking-tight text-foreground;
+  }
+
+  .metric-label {
+    @apply text-sm font-medium text-muted-foreground uppercase tracking-wider;
+  }
+
+  .metric-change-positive {
+    @apply text-success text-sm font-medium flex items-center gap-1;
+  }
+
+  .metric-change-negative {
+    @apply text-destructive text-sm font-medium flex items-center gap-1;
+  }
+
+  .section-title {
+    @apply text-lg font-semibold text-foreground tracking-tight;
+  }
+
+  .section-subtitle {
+    @apply text-sm text-muted-foreground;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary-glow transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border border-border text-foreground hover:bg-secondary hover:border-accent/50 transition-all duration-200;
+  }
+
+  .input-premium {
+    @apply bg-input border border-border text-foreground placeholder:text-muted-foreground focus:border-accent focus:ring-1 focus:ring-accent/50 transition-all duration-200;
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-sm bg-card/80;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-foreground to-muted-foreground;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
