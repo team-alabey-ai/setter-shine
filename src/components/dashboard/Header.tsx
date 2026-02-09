@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { LogOut } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/contexts/AuthContext';
 import DateRangePicker from './DateRangePicker';
 import FilterDropdown from './FilterDropdown';
 import { DateRangePreset } from '@/lib/mockData';
@@ -14,11 +15,16 @@ interface HeaderProps {
 
 const Header = ({ dateRange, onDateRangeChange, clientName = '{Client}' }: HeaderProps) => {
   const navigate = useNavigate();
+  const { signOut } = useAuth();
 
-  const handleLogout = () => {
-    // Add your logout logic here (e.g., clear session, tokens)
-    toast.success('Logged out successfully');
-    navigate('/login');
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      toast.success('Logged out successfully');
+      navigate('/');
+    } catch (error) {
+      toast.error('Failed to log out');
+    }
   };
 
   return (
