@@ -27,7 +27,7 @@ const Login = () => {
       } else {
         await signIn(email, password);
         toast.success('Login successful!');
-        navigate('/');
+        navigate('/saintvii');
       }
     } catch (error: any) {
       toast.error(error.message || 'Authentication failed.');
