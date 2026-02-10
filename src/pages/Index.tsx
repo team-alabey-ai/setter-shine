@@ -8,6 +8,7 @@ import TopDaysTable from '@/components/dashboard/TopDaysTable';
 import MetricToggle from '@/components/dashboard/MetricToggle';
 import EmptyState from '@/components/dashboard/EmptyState';
 import { useMetricsDaily } from '@/hooks/useMetricsDaily';
+import { useAuth } from '@/contexts/AuthContext';
 import {
   DailyData,
   DateRangePreset,
@@ -27,6 +28,9 @@ const Index = () => {
   const [selectedChartMetric, setSelectedChartMetric] = useState<keyof DailyData>('meetings_booked');
   const [showSecondaryMetric, setShowSecondaryMetric] = useState(false);
   const [meetingsGoal, setMeetingsGoal] = useState<number>(0);
+
+  // Get tenant ID from auth
+  const { tenantId } = useAuth();
 
   // Fetch real data from Supabase
   const { data: metricsData, isLoading, error } = useMetricsDaily();
@@ -93,6 +97,25 @@ const Index = () => {
     setSelectedChartMetric(metric);
   };
 
+  // No tenant ID - user not properly configured
+  if (!tenantId) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header
+          dateRange={dateRange}
+          onDateRangeChange={setDateRange}
+          clientName={clientName}
+        />
+        <main className="max-w-[1600px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
+          <EmptyState
+            title="Account Not Connected"
+            description="Your account is not connected to any dashboard data. Please contact support to set up your account."
+          />
+        </main>
+      </div>
+    );
+  }
+
   // Loading state
   if (isLoading) {
     return (
@@ -145,7 +168,7 @@ const Index = () => {
         <main className="max-w-[1600px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
           <EmptyState
             title="No metrics data available"
-            description="There's no data in the metrics_daily table for your tenant. Please add some data to get started."
+            description="No data has been received yet. Your n8n workflow will populate this dashboard with metrics data."
           />
         </main>
       </div>

@@ -1,23 +1,29 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase';
 import { Tables } from '@/integrations/supabase/types';
+import { useAuth } from '@/contexts/AuthContext';
 
 type MetricsDailyRow = Tables<'metrics_daily'>;
-import { CURRENT_TENANT_ID } from '@/lib/constants';
 import { DailyData } from '@/lib/mockData';
 
 /**
  * Hook to fetch metrics_daily data from Supabase
- * Filters by the current tenant ID and orders by day
+ * Filters by the logged-in user's tenant ID and orders by day
  */
 export const useMetricsDaily = () => {
+  const { tenantId } = useAuth();
+
   return useQuery<DailyData[], Error>({
-    queryKey: ['metrics_daily', CURRENT_TENANT_ID],
+    queryKey: ['metrics_daily', tenantId],
     queryFn: async () => {
+      if (!tenantId) {
+        throw new Error('No tenant ID found. Please contact support to connect your account.');
+      }
+
       const { data, error } = await supabase
         .from('metrics_daily')
         .select('*')
-        .eq('tenant_id', CURRENT_TENANT_ID)
+        .eq('tenant_id', tenantId)
         .order('day', { ascending: true });
 
       if (error) {
@@ -54,13 +60,19 @@ export const useMetricsDaily = () => {
  * Hook to fetch metrics for a specific date range
  */
 export const useMetricsByDateRange = (startDate: Date, endDate: Date) => {
+  const { tenantId } = useAuth();
+
   return useQuery<DailyData[], Error>({
-    queryKey: ['metrics_daily', CURRENT_TENANT_ID, startDate.toISOString(), endDate.toISOString()],
+    queryKey: ['metrics_daily', tenantId, startDate.toISOString(), endDate.toISOString()],
     queryFn: async () => {
+      if (!tenantId) {
+        throw new Error('No tenant ID found. Please contact support to connect your account.');
+      }
+
       const { data, error } = await supabase
         .from('metrics_daily')
         .select('*')
-        .eq('tenant_id', CURRENT_TENANT_ID)
+        .eq('tenant_id', tenantId)
         .gte('day', startDate.toISOString().split('T')[0])
         .lte('day', endDate.toISOString().split('T')[0])
         .order('day', { ascending: true });
