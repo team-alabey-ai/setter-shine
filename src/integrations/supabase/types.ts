@@ -22,6 +22,7 @@ export type Database = {
           lead_id: number
           source: string | null
           summary: string | null
+          tenant_id: string | null
           window_end_at: string
           window_start_at: string
         }
@@ -32,6 +33,7 @@ export type Database = {
           lead_id: number
           source?: string | null
           summary?: string | null
+          tenant_id?: string | null
           window_end_at: string
           window_start_at: string
         }
@@ -42,6 +44,7 @@ export type Database = {
           lead_id?: number
           source?: string | null
           summary?: string | null
+          tenant_id?: string | null
           window_end_at?: string
           window_start_at?: string
         }
@@ -145,10 +148,12 @@ export type Database = {
           created_at: string
           first_name: string | null
           follow_ups_sent: number
+          ghl_opportunity_id: string | null
           id: number
           is_last_messsage_followup: boolean | null
           last_message_time: string
           last_name: string | null
+          lead_source: string | null
           sid: string
           source: string | null
           stage: Database["public"]["Enums"]["stage"] | null
@@ -161,10 +166,12 @@ export type Database = {
           created_at?: string
           first_name?: string | null
           follow_ups_sent?: number
+          ghl_opportunity_id?: string | null
           id?: number
           is_last_messsage_followup?: boolean | null
           last_message_time?: string
           last_name?: string | null
+          lead_source?: string | null
           sid: string
           source?: string | null
           stage?: Database["public"]["Enums"]["stage"] | null
@@ -177,10 +184,12 @@ export type Database = {
           created_at?: string
           first_name?: string | null
           follow_ups_sent?: number
+          ghl_opportunity_id?: string | null
           id?: number
           is_last_messsage_followup?: boolean | null
           last_message_time?: string
           last_name?: string | null
+          lead_source?: string | null
           sid?: string
           source?: string | null
           stage?: Database["public"]["Enums"]["stage"] | null
@@ -625,6 +634,12 @@ export type Database = {
         | "Conversation Ended"
         | "Disqualified"
         | "Meeting Booked"
+        | "New"
+        | "Rapport"
+        | "Pitching"
+        | "Link Sent"
+        | "Pending Booking"
+        | "Booked"
       stage_landing_page:
         | "Opted In"
         | "Typeform Partial"
@@ -776,6 +791,12 @@ export const Constants = {
         "Conversation Ended",
         "Disqualified",
         "Meeting Booked",
+        "New",
+        "Rapport",
+        "Pitching",
+        "Link Sent",
+        "Pending Booking",
+        "Booked",
       ],
       stage_landing_page: [
         "Opted In",

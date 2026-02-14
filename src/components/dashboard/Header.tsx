@@ -11,9 +11,11 @@ interface HeaderProps {
   dateRange: DateRangePreset;
   onDateRangeChange: (preset: DateRangePreset) => void;
   clientName?: string;
+  customRange?: { start: Date; end: Date };
+  onCustomRangeChange?: (range: { start: Date; end: Date }) => void;
 }
 
-const Header = ({ dateRange, onDateRangeChange, clientName = '{Client}' }: HeaderProps) => {
+const Header = ({ dateRange, onDateRangeChange, clientName = '{Client}', customRange, onCustomRangeChange }: HeaderProps) => {
   const navigate = useNavigate();
   const { signOut } = useAuth();
 
@@ -48,6 +50,8 @@ const Header = ({ dateRange, onDateRangeChange, clientName = '{Client}' }: Heade
             <DateRangePicker
               value={dateRange}
               onChange={onDateRangeChange}
+              customRange={customRange}
+              onCustomRangeChange={onCustomRangeChange}
             />
             <FilterDropdown
               label="Source"
