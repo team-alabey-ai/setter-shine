@@ -21,7 +21,7 @@ interface TrendChartProps {
 const metricLabels: Record<string, string> = {
   meetings_booked: 'Meetings Booked',
   total_inbound_dms: 'Inbound DMs',
-  new_follower_outbounds: 'New Follower Outbounds',
+  new_follower_outbounds: 'Outbound DMs',
   qualified_count: 'Qualified',
   total_follow_ups: 'Follow Ups',
   total_conversations: 'Total Conversations',

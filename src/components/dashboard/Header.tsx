@@ -53,11 +53,6 @@ const Header = ({ dateRange, onDateRangeChange, clientName = '{Client}', customR
               customRange={customRange}
               onCustomRangeChange={onCustomRangeChange}
             />
-            <FilterDropdown
-              label="Source"
-              options={['All Sources', 'Inbound', 'Outbound']}
-              placeholder="All Sources"
-            />
             <Button
               variant="outline"
               size="sm"
