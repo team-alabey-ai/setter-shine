@@ -25,6 +25,7 @@ import {
 
 const Index = () => {
   const [dateRange, setDateRange] = useState<DateRangePreset>('last7');
+  const [customRange, setCustomRange] = useState<{ start: Date; end: Date } | undefined>();
   const [selectedChartMetric, setSelectedChartMetric] = useState<keyof DailyData>('meetings_booked');
   const [showSecondaryMetric, setShowSecondaryMetric] = useState(false);
   const [meetingsGoal, setMeetingsGoal] = useState<number>(0);
@@ -40,11 +41,13 @@ const Index = () => {
     if (!metricsData || metricsData.length === 0) {
       return { currentData: [], previousData: [] };
     }
-    const { start, end } = getDateRangeFromPreset(dateRange);
+    const { start, end } = dateRange === 'custom' && customRange
+      ? customRange
+      : getDateRangeFromPreset(dateRange);
     const current = filterByDateRange(metricsData, start, end);
     const previous = getPreviousPeriodData(metricsData, start, end);
     return { currentData: current, previousData: previous };
-  }, [dateRange, metricsData]);
+  }, [dateRange, customRange, metricsData]);
 
   // Compute metrics
   const metrics = useMemo(() => {
@@ -105,6 +108,8 @@ const Index = () => {
           dateRange={dateRange}
           onDateRangeChange={setDateRange}
           clientName={clientName}
+          customRange={customRange}
+          onCustomRangeChange={setCustomRange}
         />
         <main className="max-w-[1600px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
           <EmptyState
@@ -124,6 +129,8 @@ const Index = () => {
           dateRange={dateRange}
           onDateRangeChange={setDateRange}
           clientName={clientName}
+          customRange={customRange}
+          onCustomRangeChange={setCustomRange}
         />
         <main className="max-w-[1600px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
           <div className="flex items-center justify-center min-h-[400px]">
@@ -145,6 +152,8 @@ const Index = () => {
           dateRange={dateRange}
           onDateRangeChange={setDateRange}
           clientName={clientName}
+          customRange={customRange}
+          onCustomRangeChange={setCustomRange}
         />
         <main className="max-w-[1600px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
           <EmptyState
@@ -164,6 +173,8 @@ const Index = () => {
           dateRange={dateRange}
           onDateRangeChange={setDateRange}
           clientName={clientName}
+          customRange={customRange}
+          onCustomRangeChange={setCustomRange}
         />
         <main className="max-w-[1600px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
           <EmptyState
@@ -181,6 +192,8 @@ const Index = () => {
         dateRange={dateRange}
         onDateRangeChange={setDateRange}
         clientName={clientName}
+        customRange={customRange}
+        onCustomRangeChange={setCustomRange}
       />
 
       <main className="max-w-[1600px] mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 sm:space-y-8">
