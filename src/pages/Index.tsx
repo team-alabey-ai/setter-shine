@@ -224,7 +224,7 @@ const Index = () => {
               onClick={() => handleMetricClick('qualified_count')}
             />
             <MetricCard
-              title="Conv. per Meeting"
+              title="Conversion Rate"
               value={`${metrics.convPerMeetingPct.toFixed(1)}%`}
               change={metrics.convPerMeetingPctChange}
               subtitle={`1 per ${metrics.convPerMeetingRatio.toFixed(1)} convos`}
@@ -241,7 +241,7 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
             <MetricCard
-              title="Total Inbound DMs"
+              title="Inbound DMs"
               value={metrics.inboundDMs}
               change={metrics.inboundChange}
               tooltip={metricDefinitions.total_inbound_dms}
@@ -249,7 +249,7 @@ const Index = () => {
               onClick={() => handleMetricClick('total_inbound_dms')}
             />
             <MetricCard
-              title="New Follower Outbounds"
+              title="Outbound DMs"
               value={metrics.outbounds}
               change={metrics.outboundsChange}
               tooltip={metricDefinitions.new_follower_outbounds}
@@ -257,7 +257,7 @@ const Index = () => {
               onClick={() => handleMetricClick('new_follower_outbounds')}
             />
             <MetricCard
-              title="Total Follow Ups"
+              title="Follow Ups"
               value={metrics.followUps}
               change={metrics.followUpsChange}
               tooltip={metricDefinitions.total_follow_ups}
