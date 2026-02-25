@@ -123,30 +123,8 @@ const Login = () => {
                 {isLoading ? (isSignUp ? 'Creating account...' : 'Signing in...') : (isSignUp ? 'Create account' : 'Sign in')}
               </Button>
             </form>
-
-            <p className="mt-6 text-center text-sm text-muted-foreground">
-              {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
-              <button
-                type="button"
-                className="font-medium text-foreground hover:text-primary-foreground transition-colors"
-                onClick={() => setIsSignUp(!isSignUp)}
-              >
-                {isSignUp ? 'Sign in' : 'Sign up'}
-              </button>
-            </p>
           </CardContent>
         </Card>
-
-        <p className="mt-8 text-center text-xs text-muted-foreground">
-          By signing in, you agree to our{' '}
-          <button className="underline underline-offset-4 hover:text-foreground transition-colors">
-            Terms of Service
-          </button>{' '}
-          and{' '}
-          <button className="underline underline-offset-4 hover:text-foreground transition-colors">
-            Privacy Policy
-          </button>
-        </p>
       </div>
     </div>
   );
